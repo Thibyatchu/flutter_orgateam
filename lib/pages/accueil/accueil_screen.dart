@@ -60,28 +60,37 @@ class AccueilScreen extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
               "Événements à venir",
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
+            // Liste des événements avec un Card réduit
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: evenements.length,
               itemBuilder: (context, index) {
                 final evenement = evenements[index];
-                return Card(
-                  margin: const EdgeInsets.symmetric(vertical: 5),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.blue.shade100,
-                      child: const Icon(Icons.calendar_today, color: Colors.blue),
+                return Container(
+                  width: MediaQuery.of(context).size.width * 0.8, // Limite la largeur de la carte
+                  child: Card(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
                     ),
-                    title: Text(evenement.titre),
-                    subtitle: Text("Date : ${evenement.date}"),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.all(16),
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.blue.shade100,
+                        child: const Icon(Icons.calendar_today, color: Colors.blue),
+                      ),
+                      title: Text(evenement.titre, style: TextStyle(fontWeight: FontWeight.bold)),
+                      subtitle: Text("Date : ${evenement.date}"),
+                    ),
                   ),
                 );
               },
@@ -92,21 +101,30 @@ class AccueilScreen extends StatelessWidget {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
+            // Liste des équipes avec un Card réduit
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: equipes.length,
               itemBuilder: (context, index) {
                 final equipe = equipes[index];
-                return Card(
-                  margin: const EdgeInsets.symmetric(vertical: 5),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.green.shade100,
-                      child: const Icon(Icons.sports_rugby, color: Colors.green),
+                return Container(
+                  width: MediaQuery.of(context).size.width * 0.8, // Limite la largeur de la carte
+                  child: Card(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
                     ),
-                    title: Text(equipe.title),
-                    subtitle: Text(equipe.description),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.all(16),
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.green.shade100,
+                        child: const Icon(Icons.sports_rugby, color: Colors.green),
+                      ),
+                      title: Text(equipe.title, style: TextStyle(fontWeight: FontWeight.bold)),
+                      subtitle: Text(equipe.description),
+                    ),
                   ),
                 );
               },
@@ -117,33 +135,42 @@ class AccueilScreen extends StatelessWidget {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
+            // Liste des joueurs avec un Card réduit
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: joueursTopPerformers.length,
               itemBuilder: (context, index) {
                 final joueur = joueursTopPerformers[index];
-                return Card(
-                  margin: const EdgeInsets.symmetric(vertical: 5),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.orange.shade100,
-                      child: const Icon(Icons.person, color: Colors.orange),
+                return Container(
+                  width: MediaQuery.of(context).size.width * 0.8, // Limite la largeur de la carte
+                  child: Card(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
                     ),
-                    title: Text(joueur.nom),
-                    subtitle: Text(
-                      "Position : ${joueur.position}\nEssais marqués : ${joueur.essaisMarques}",
-                    ),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.info, color: Colors.blue),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => JoueurDetailScreen(joueur: joueur),
-                          ),
-                        );
-                      },
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.all(16),
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.orange.shade100,
+                        child: const Icon(Icons.person, color: Colors.orange),
+                      ),
+                      title: Text(joueur.nom, style: TextStyle(fontWeight: FontWeight.bold)),
+                      subtitle: Text(
+                        "Position : ${joueur.position}\nEssais marqués : ${joueur.essaisMarques}",
+                      ),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.info, color: Colors.blue),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => JoueurDetailScreen(joueur: joueur),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 );
