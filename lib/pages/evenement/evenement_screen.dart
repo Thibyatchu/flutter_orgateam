@@ -8,9 +8,9 @@ class EvenementScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Données en dur
     final List<Evenement> evenements = [
-      Evenement(titre: "Tournoi Régional", date: "2024-12-05"),
-      Evenement(titre: "Match amical", date: "2024-12-12"),
-      Evenement(titre: "Conférence sportive", date: "2024-12-20"),
+      Evenement(titre: "Tournoi Régional", date: "05-12-2024"),
+      Evenement(titre: "Match amical", date: "12-12-2024"),
+      Evenement(titre: "Conférence sportive", date: "20-12-2024"),
     ];
 
     evenements.sort((a, b) => a.date.compareTo(b.date));

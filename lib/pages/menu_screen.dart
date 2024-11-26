@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'accueil/accueil_screen.dart';
 import 'equipe/equipe_screen.dart';
 import 'evenement/evenement_screen.dart';
 import 'parametre/parametre_screen.dart';
@@ -9,7 +10,7 @@ class MenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4, // Ajout du nouvel onglet
+      length: 4, // Nombre total d'onglets
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Rugby App'),
@@ -18,25 +19,16 @@ class MenuScreen extends StatelessWidget {
               Tab(icon: Icon(Icons.home), text: "Accueil"),
               Tab(icon: Icon(Icons.sports_rugby), text: "Équipe"),
               Tab(icon: Icon(Icons.event), text: "Événement"),
-              Tab(icon: Icon(Icons.settings), text: "Paramètres"), // Nouvel onglet
+              Tab(icon: Icon(Icons.settings), text: "Paramètres"),
             ],
           ),
         ),
         body: TabBarView(
           children: [
-            const Center(
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Text(
-                  "Bienvenue dans l'application Rugby ! Suivez vos équipes, événements et bien plus encore.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
+            const AccueilScreen(),
             const EquipeScreen(),
             const EvenementScreen(),
-            const ParametreScreen(), // Nouvel onglet
+            const ParametreScreen(),
           ],
         ),
       ),
