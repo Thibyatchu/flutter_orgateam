@@ -1,47 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/joueur/joueur_detail_screen.dart';
+import '../../utils/api_service.dart';
 import 'equipe_model.dart';
+import '../joueur/joueur_detail_screen.dart';
 
 class EquipeScreen extends StatelessWidget {
   const EquipeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: equipes.length,
-      itemBuilder: (context, index) {
-        final equipe = equipes[index];
-        return Card(
-          elevation: 4, // Ajout d'ombre pour un meilleur design
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: Colors.blue.shade100,
-              child: const Icon(Icons.sports_rugby, color: Colors.blue),
-            ),
-            title: Text(
-              equipe.title,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-            subtitle: Text(
-              equipe.description,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(color: Colors.black54),
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DetailEquipeScreen(equipe: equipe),
+    final apiService = ApiService('https://api.example.com'); // Remplacez par votre URL d'API
+
+    return FutureBuilder<List<Equipe>>(
+      future: apiService.fetchEquipes(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Erreur : ${snapshot.error}'));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Center(child: Text('Aucune équipe trouvée'));
+        } else {
+          final equipes = snapshot.data!;
+          return ListView.builder(
+            itemCount: equipes.length,
+            itemBuilder: (context, index) {
+              final equipe = equipes[index];
+              return Card(
+                elevation: 4, // Ajout d'ombre pour un meilleur design
+                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.blue.shade100,
+                    child: const Icon(Icons.sports_rugby, color: Colors.blue),
+                  ),
+                  title: Text(
+                    equipe.title,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  subtitle: Text(
+                    equipe.description,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.black54),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailEquipeScreen(equipe: equipe),
+                      ),
+                    );
+                  },
                 ),
               );
             },
-          ),
-        );
+          );
+        }
       },
     );
   }

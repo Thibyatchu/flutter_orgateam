@@ -5,7 +5,7 @@ class Joueur {
   final String dateNaissance;
   final int pointure;
   final int essaisMarques;
-  final List<Map<String, String>> cartons; // [{"couleur": "jaune", "date": "2024-02-15"}]
+  final List<Map<String, String>> cartons;
   final List<String> postesSecondaires;
 
   Joueur({
@@ -18,4 +18,23 @@ class Joueur {
     required this.cartons,
     required this.postesSecondaires,
   });
+
+  factory Joueur.fromJson(Map<String, dynamic> json) {
+    var cartonsFromJson = json['cartons'] as List;
+    List<Map<String, String>> cartonsList = cartonsFromJson.map((i) => Map<String, String>.from(i)).toList();
+
+    var postesFromJson = json['postesSecondaires'] as List;
+    List<String> postesList = postesFromJson.map((i) => i.toString()).toList();
+
+    return Joueur(
+      nom: json['nom'],
+      position: json['position'],
+      age: json['age'],
+      dateNaissance: json['dateNaissance'],
+      pointure: json['pointure'],
+      essaisMarques: json['essaisMarques'],
+      cartons: cartonsList,
+      postesSecondaires: postesList,
+    );
+  }
 }
