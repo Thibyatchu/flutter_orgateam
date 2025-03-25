@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'pages/menu_screen.dart';
 import 'pages/connexion/login_screen.dart';
 import 'pages/connexion/register_screen.dart';
+import 'pages/connexion/admin_login_screen.dart';
+import 'pages/admin/admin_dashboard.dart';
 import 'utils/locale_provider.dart';
 import 'utils/theme_provider.dart';
 import 'utils/app_localizations.dart';
@@ -52,6 +54,8 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
         '/menu': (context) => const MenuScreen(),
+        '/admin-login': (context) => const AdminLoginScreen(),
+        '/admin-dashboard': (context) => const AdminDashboard(),
       },
     );
   }

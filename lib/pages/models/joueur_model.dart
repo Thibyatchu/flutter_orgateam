@@ -1,4 +1,5 @@
 class Joueur {
+  final int? id;
   final String nom;
   final String position;
   final int age;
@@ -9,6 +10,7 @@ class Joueur {
   final List<String> postesSecondaires;
 
   Joueur({
+    this.id,
     required this.nom,
     required this.position,
     required this.age,
@@ -27,6 +29,7 @@ class Joueur {
     List<String> postesList = postesFromJson.map((i) => i.toString()).toList();
 
     return Joueur(
+      id: json['id'],
       nom: json['nom'],
       position: json['position'],
       age: json['age'],
@@ -36,5 +39,19 @@ class Joueur {
       cartons: cartonsList,
       postesSecondaires: postesList,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'nom': nom,
+      'position': position,
+      'age': age,
+      'dateNaissance': dateNaissance,
+      'pointure': pointure,
+      'essaisMarques': essaisMarques,
+      'cartons': cartons,
+      'postesSecondaires': postesSecondaires,
+    };
   }
 }

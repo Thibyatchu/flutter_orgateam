@@ -3,6 +3,7 @@ import 'accueil/accueil_screen.dart';
 import 'equipe/equipe_screen.dart';
 import 'evenement/evenement_screen.dart';
 import 'parametre/parametre_screen.dart';
+import 'connexion/admin_login_screen.dart'; // Import de l'écran de connexion admin
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -14,6 +15,14 @@ class MenuScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Rugby App'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.admin_panel_settings),
+              onPressed: () {
+                Navigator.pushNamed(context, '/admin-login');
+              },
+            ),
+          ],
           bottom: const TabBar(
             tabs: [
               Tab(icon: Icon(Icons.home), text: "Accueil"),
@@ -23,12 +32,12 @@ class MenuScreen extends StatelessWidget {
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
-            const AccueilScreen(),
-            const EquipeScreen(),
-            const EvenementScreen(),
-            const ParametreScreen(),
+            AccueilScreen(),
+            EquipeScreen(),
+            EvenementScreen(),
+            ParametreScreen(),
           ],
         ),
       ),
